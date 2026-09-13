@@ -406,7 +406,7 @@ server = [
 
 [[package]]
 name = "foro"
-version = "0.12.2"
+version = "0.13.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -415,9 +415,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/eb/06/2aa04699d0c87f10579a030e2c2f86807ca6af05643e7f356c7b89ce6782/foro-0.12.2.tar.gz", hash = "sha256:c6f3e3f0fae30b5540c76fb62cf9b548b03fca74125de993b652debcad24618e", size = 407585, upload-time = "2026-09-04T11:12:12.557Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fe/a0/94b4b2f8d7def46d28195bfa7f8dbfa7a3ec2b7a83d1a643db960b9fb76d/foro-0.13.1.tar.gz", hash = "sha256:0879ba320374e522da381918ba34e3de5cb6d5013e791c4a8c0301f97c21fd0f", size = 408093, upload-time = "2026-09-13T16:24:25.849Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a6/c9/8f05d98650ea63721b1d2b75a3b6096fa5e753e373ac1869c39659bda419/foro-0.12.2-py3-none-any.whl", hash = "sha256:9b78cc3984bba107006aa815de83481ce3787535bab63ba17ae9d44088544d96", size = 48587, upload-time = "2026-09-04T11:12:11.154Z" },
+    { url = "https://files.pythonhosted.org/packages/73/5d/74e467068a957f2bc35ad6a04512029032b80435ef7a4fc22a419db5bd38/foro-0.13.1-py3-none-any.whl", hash = "sha256:bbb811191a47f0f395dc470186da61e9df9258c1940b12438ef00826686c044f", size = 48842, upload-time = "2026-09-13T16:24:24.547Z" },
 ]
 
 [[package]]
