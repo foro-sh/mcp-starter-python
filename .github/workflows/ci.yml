@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+
+      # --frozen installs exactly what uv.lock pins, the way foro.sh deploys.
+      # Tests that pass against a dependency the lockfile lacks would pass
+      # here and fail on import once deployed.
+      - run: uv sync --frozen
+      - run: uv run --frozen pytest
+
+  skills:
+    name: Skills match foro-sh/foro
+    # Only in the template itself. In a repo created from it the skills belong
+    # to its owner, who is free to edit them.
+    if: github.repository == 'foro-sh/mcp-starter-python'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Compare with the canonical skills
+        run: |
+          git clone --quiet --depth 1 https://github.com/foro-sh/foro.git "$RUNNER_TEMP/foro"
+          status=0
+          for skill in design-mcp-tools wrap-an-http-api deploy-to-foro; do
+            if ! diff -r "$RUNNER_TEMP/foro/plugins/claude-code/skills/$skill" ".claude/skills/$skill"; then
+              echo "::error file=.claude/skills/$skill/SKILL.md::$skill differs from foro-sh/foro. Copy plugins/claude-code/skills/$skill from its main branch."
+              status=1
+            fi
+          done
+          exit $status
