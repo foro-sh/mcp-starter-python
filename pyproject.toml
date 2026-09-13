@@ -1,0 +1,15 @@
+[project]
+name = "mcp-server"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["fastmcp", "foro>=0.12.2"]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+# tests/ has no __init__.py (flat layout) - without this, pytest's default
+# rootdir-based import resolution won't put the project root (where app.py
+# and tools/ live) on sys.path, and `from tools.add import add` in
+# tests/test_tools.py fails with ModuleNotFoundError.
+pythonpath = ["."]
